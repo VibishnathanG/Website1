@@ -42,7 +42,7 @@ pipeline {
 
         stage('Deploy'){
             steps {
-                sh "docker run -it vibishnathan/mywebsite:latest -p 82:80 mypod"
+                sh "docker run -d mypod -p 82:80 vibishnathan/mywebsite:latest"
             }
         }
         }
