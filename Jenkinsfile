@@ -7,28 +7,28 @@ pipeline {
 
     agent any
 
-    steps {
+    stages {
         stage("Pull Source"){
-            step {
+            steps {
             git credentialsId: '0a5bcc44-5ffe-494a-ad1e-f82880bc48d2', git_branch: '${git_branch}', url: "${git_url}"
         }
 
         }
 
         stage("Maven Build"){
-            step{
+            steps {
                 sh 'echo due to no Jar involved this is sameple Build step'
             }
         }
 
         stage("Docker Image Build"){
-            step{
+            steps {
                 sh 'docker build -t mywebsite .'
             }
         }
 
         stage("Docker Image Push"){
-            step{
+            steps {
 
                  withCredentials([usernamePassword(credentialsId: '	f34f79d9-39e2-430b-a834-2011a20020fe', passwordVariable: 'Password', usernameVariable: 'Username')]){
                     sh "docker login -u ${env.Username} -p ${env.Password}"
@@ -40,7 +40,7 @@ pipeline {
         }
 
         stage('Deploy'){
-            step{
+            steps {
                 sh "docker run -it vibishnathan/mywebsite:latest -p 82:80 mypod"
             }
         }
