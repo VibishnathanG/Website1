@@ -42,7 +42,7 @@ pipeline {
 
         stage('Deploy'){
             steps {
-                sh "docker run -d --name nginx1  vibishnathan/mywebsite:latest -p 82:80"
+                sh "docker container run -d --name webserver1 -p 82:80 vibishnathan/mywebsite:latest"
             }
         }
         }
