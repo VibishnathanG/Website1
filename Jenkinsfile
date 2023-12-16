@@ -21,6 +21,15 @@ pipeline {
             }
         }*/
 
+        stage("Remove Old Container"){
+            steps{
+                script{
+                    chmod +x RemoveOldContainer.sh
+                    sh RemoveOldContainer.sh
+                }
+            }
+        }
+
         stage("Docker Image Build"){
             steps {
                 sh "docker image prune -a -f"
