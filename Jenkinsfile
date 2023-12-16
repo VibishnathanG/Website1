@@ -42,7 +42,12 @@ pipeline {
 
         stage('Deploy'){
             steps {
-                sh "docker container run -d --name webserver1 -p 82:80 vibishnathan/mywebsite:latest"
+                    // Generate a dynamic container name
+                    def containerName = "webserver-${BUILD_NUMBER}"
+                    // Remove existing container if it exists
+                    sh "docker rm -f ${containerName} || true"
+                    // Build and run the container
+                    sh "docker container run -d --name ${containerName} -p 82:80 vibishnathan/mywebsite:latest"
             }
         }
         }
