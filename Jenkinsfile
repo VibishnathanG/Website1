@@ -32,7 +32,7 @@ pipeline {
 
                  withCredentials([usernamePassword(credentialsId: '	f34f79d9-39e2-430b-a834-2011a20020fe', passwordVariable: 'Password', usernameVariable: 'Username')]){
                     sh "docker login -u ${env.Username} -p ${env.Password}"
-                    sh "docker image prune -f"
+                    sh "docker image prune -a -f"
                     sh 'docker image tag mywebsite vibishnathan/mywebsite:latest'
                     sh 'docker image push vibishnathan/mywebsite:latest'
                  }
