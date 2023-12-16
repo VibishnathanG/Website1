@@ -15,11 +15,11 @@ pipeline {
 
         }
 
-        stage("Maven Build"){
+        /*stage("Maven Build"){
             steps {
                 sh 'echo due to no Jar involved this is sameple Build step'
             }
-        }
+        }*/
 
         stage("Docker Image Build"){
             steps {
