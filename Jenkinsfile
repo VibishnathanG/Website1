@@ -24,8 +24,8 @@ pipeline {
         stage("Remove Old Container"){
             steps{
                 script{
-                    chmod +x RemoveOldContainer.sh
-                    sh RemoveOldContainer.sh
+                    sh "chmod +x RemoveOldContainer.sh"
+                    sh "./RemoveOldContainer.sh"
                 }
             }
         }
