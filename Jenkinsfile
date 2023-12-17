@@ -6,7 +6,7 @@ pipeline {
 
     agent any
 
-    stages
+    stages {
         stage("Pull Source") {
             steps {
                 script{
@@ -61,5 +61,5 @@ pipeline {
     always {
          deleteDir() /* cleanup the workspace */
     }
-    }      
+    }
 }
