@@ -1,7 +1,7 @@
 pipeline {
     environment {
         git_url = "https://github.com/VibishnathanG/Website1.git"
-        def branchName = env.BRANCH_NAME ?: 'master'
+        
     }
 
     agent any
@@ -9,7 +9,10 @@ pipeline {
     stages {
         stage("Pull Source") {
             steps {
-                git credentialsId: '0a5bcc44-5ffe-494a-ad1e-f82880bc48d2', branch: "${branchName}", url: "${git_url}"
+                script{
+                    def branchName = env.BRANCH_NAME ?: 'master'
+                    git credentialsId: '0a5bcc44-5ffe-494a-ad1e-f82880bc48d2', branch: "${branchName}", url: "${git_url}"    
+                }            
             }
         }
 
@@ -52,11 +55,14 @@ pipeline {
                 }
             }
         }
-
-        post {
+        stage("Post Action Cleanup"){
+            steps {
+                post {
             always {
                 deleteDir() /* cleanup the workspace */
             }
         }
+            }
+        }      
     }
 }
