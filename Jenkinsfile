@@ -19,14 +19,17 @@ pipeline {
 
         stage("Maven Build") {
             steps {
+                script {
                 sh 'echo due to no Jar involved this is a sample Build step'
-                sh "echo \${branchName}"
+                echo "Branch in build ${branchName}"
+                }
+                
             }
         }
 
         stage('Deploy') {
             when {
-                expression { env.BRANCH_NAME == 'master' }
+                expression { branchName == 'master' }
             }
             steps {
                 script {
