@@ -19,6 +19,7 @@ pipeline {
         stage("Maven Build") {
             steps {
                 sh 'echo due to no Jar involved this is a sample Build step'
+                sh 'echo "${branchName}"'
             }
         }
 
