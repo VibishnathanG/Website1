@@ -1,7 +1,7 @@
 pipeline {
     environment {
         git_url = "https://github.com/VibishnathanG/Website1.git"
-        
+        branchName = "${env.BRANCH_NAME ?: 'master'}"
     }
 
     agent any
@@ -10,7 +10,6 @@ pipeline {
         stage("Pull Source") {
             steps {
                 script{
-                    def branchName = env.BRANCH_NAME ?: 'master'
                     git credentialsId: '0a5bcc44-5ffe-494a-ad1e-f82880bc48d2', branch: "${branchName}", url: "${git_url}"  
                     echo "Branch Name: ${branchName}" // Add this line
                 }            
@@ -20,8 +19,8 @@ pipeline {
         stage("Maven Build") {
             steps {
                 script {
-                echo 'due to no Jar involved this is a sample Build step'
-                echo 'Branch in build ${branchName}'
+                echo "due to no Jar involved this is a sample Build step"
+                echo "Branch in build ${branchName}"
                 }
                 
             }
