@@ -1,7 +1,7 @@
 pipeline {
     environment {
         git_url = "https://github.com/VibishnathanG/Website1.git"
-        branchName = "${env.BRANCH_NAME ?: 'master'}"
+        branchName = "${env.BRANCH_NAME}"
     }
 
     agent any
