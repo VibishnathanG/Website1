@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                 sh 'echo due to no Jar involved this is a sample Build step'
-                echo "Branch in build ${branchName}"
+                sh 'echo "Branch in build ${branchName}"'
                 }
                 
             }
@@ -29,7 +29,7 @@ pipeline {
 
         stage('Deploy') {
             when {
-                expression { branchName == 'master' }
+                expression { ${branchName} == 'master' }
             }
             steps {
                 script {
