@@ -6,12 +6,12 @@ pipeline {
 
     agent any
 
-    stages {
+    stages
         stage("Pull Source") {
             steps {
                 script{
                     def branchName = env.BRANCH_NAME ?: 'master'
-                    git credentialsId: '0a5bcc44-5ffe-494a-ad1e-f82880bc48d2', branch: "${branchName}", url: "${git_url}"    
+                    git credentialsId: '0a5bcc44-5ffe-494a-ad1e-f82880bc48d2', branch: '${branchName}', url: '${git_url}'    
                 }            
             }
         }
@@ -19,7 +19,7 @@ pipeline {
         stage("Maven Build") {
             steps {
                 sh 'echo due to no Jar involved this is a sample Build step'
-                sh 'echo "${branchName}"'
+                sh 'echo ${env.BRANCH_NAME}'
             }
         }
 
@@ -56,14 +56,10 @@ pipeline {
                 }
             }
         }
-        stage("Post Action Cleanup"){
-            steps {
-                post {
-            always {
-                deleteDir() /* cleanup the workspace */
-            }
-        }
-            }
-        }      
     }
+    post {
+    always {
+         deleteDir() /* cleanup the workspace */
+    }
+    }      
 }
